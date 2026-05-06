@@ -26,9 +26,9 @@ $comment = trim((string)($_POST["comment"] ?? ""));
 $consent = trim((string)($_POST["consent"] ?? ""));
 $channelsRaw = $_POST["channels"] ?? [];
 
-if ($name === "" || $phone === "") {
+if ($name === "" || $phone === "" || $comment === "") {
   http_response_code(400);
-  exit("Пожалуйста, заполните обязательные поля: имя и телефон.");
+  exit("Пожалуйста, заполните обязательные поля: имя, телефон и комментарий.");
 }
 
 if ($consent !== "yes") {
@@ -51,7 +51,8 @@ $message = "Новая заявка с сайта\n\n"
   . "CRM: {$crm}\n"
   . "Процессы для автоматизации: {$processes}\n"
   . "Каналы: {$channels}\n"
-  . "Комментарий: {$comment}\n";
+  . "Комментарий: {$comment}\n"
+  . "Согласие на обработку ПД: да\n";
 
 $headers = [];
 $headers[] = "From: no-reply@иисотрудники.рф";
